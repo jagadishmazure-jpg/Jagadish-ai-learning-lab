@@ -1,0 +1,34 @@
+name: ci
+on:
+  push: { branches: [main] }
+  pull_request:
+  schedule:
+    - cron: "0 12 * * 1" # weekly, to catch external links that went dead
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.13", cache: pip }
+      - run: pip install -r requirements.txt
+      - name: Lint (ruff)
+        run: ruff check . && ruff format --check .
+      - name: Tests (offline)
+        run: pytest
+      - name: Run every spike
+        run: python scripts/run_spikes.py
+      - name: Numpy fallback backend still runs
+        run: python topics/2026-09-jev-system1-classifier/spike.py --backend numpy
+  links:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.13" }
+      - name: Link check (local links and anchors fail hard; external 404/410 fail)
+        run: python scripts/check_links.py --external

@@ -1,0 +1,75 @@
+{
+  "source": "https://github.com/jagadishmazure-jpg/Jagadish-azure-agent-labs",
+  "labs": {
+    "disaster-signal-fusion": {
+      "Business understanding": "implemented",
+      "Data understanding": "implemented",
+      "Knowledge engineering": "implemented",
+      "Model engineering": "implemented",
+      "Context engineering": "implemented",
+      "Semantic engineering": "implemented",
+      "Agent engineering": "implemented",
+      "Loop engineering": "not in scope",
+      "Evaluation engineering": "implemented",
+      "Harness engineering": "implemented",
+      "Infrastructure engineering": "compile-only",
+      "Continual learning": "not in scope"
+    },
+    "medical-eye-scan-multimodal": {
+      "Business understanding": "implemented",
+      "Data understanding": "implemented",
+      "Knowledge engineering": "implemented",
+      "Model engineering": "implemented",
+      "Context engineering": "implemented",
+      "Semantic engineering": "implemented",
+      "Agent engineering": "implemented",
+      "Loop engineering": "not in scope",
+      "Evaluation engineering": "implemented",
+      "Harness engineering": "implemented",
+      "Infrastructure engineering": "compile-only",
+      "Continual learning": "not in scope"
+    },
+    "road-network-maintenance-graph": {
+      "Business understanding": "implemented",
+      "Data understanding": "implemented",
+      "Knowledge engineering": "implemented",
+      "Model engineering": "implemented",
+      "Context engineering": "implemented",
+      "Semantic engineering": "implemented",
+      "Agent engineering": "implemented",
+      "Loop engineering": "implemented",
+      "Evaluation engineering": "implemented",
+      "Harness engineering": "implemented",
+      "Infrastructure engineering": "compile-only",
+      "Continual learning": "not in scope"
+    },
+    "legal-document-compliance": {
+      "Business understanding": "implemented",
+      "Data understanding": "implemented",
+      "Knowledge engineering": "implemented",
+      "Model engineering": "implemented",
+      "Context engineering": "implemented",
+      "Semantic engineering": "implemented",
+      "Agent engineering": "implemented",
+      "Loop engineering": "implemented",
+      "Evaluation engineering": "implemented",
+      "Harness engineering": "implemented",
+      "Infrastructure engineering": "compile-only",
+      "Continual learning": "not in scope"
+    },
+    "wind-turbine-continual-learning": {
+      "Business understanding": "implemented",
+      "Data understanding": "implemented",
+      "Knowledge engineering": "implemented",
+      "Model engineering": "implemented",
+      "Context engineering": "implemented",
+      "Semantic engineering": "implemented",
+      "Agent engineering": "implemented",
+      "Loop engineering": "implemented",
+      "Evaluation engineering": "implemented",
+      "Harness engineering": "implemented",
+      "Infrastructure engineering": "compile-only",
+      "Continual learning": "implemented"
+    }
+  }
+}

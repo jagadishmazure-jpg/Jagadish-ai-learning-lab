@@ -1,0 +1,21 @@
+[project]
+name = "ai-learning-lab"
+version = "0.1.0"
+description = "Short, offline spikes that test new AI technology before it is adopted"
+requires-python = ">=3.11"
+dependencies = ["numpy>=2.0", "networkx>=3.3", "scikit-learn>=1.5"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff==0.16.9"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py311"
+extend-exclude = [".venv"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "W"]
+
+[tool.pytest.ini_options]
+addopts = "-q --import-mode=importlib"
+testpaths = ["tests", "topics", "TEMPLATE"]
