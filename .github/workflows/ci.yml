@@ -21,8 +21,10 @@ jobs:
         run: pytest
       - name: Run every spike
         run: python scripts/run_spikes.py
+      - name: Docs match code and output
+        run: python scripts/doc_drift.py --check
       - name: Numpy fallback backend still runs
-        run: python topics/2026-09-jev-system1-classifier/spike.py --backend numpy
+        run: python topics/03-jev-system1-classifier/spike.py --backend numpy
   links:
     runs-on: ubuntu-latest
     timeout-minutes: 10
