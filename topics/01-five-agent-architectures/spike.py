@@ -58,10 +58,10 @@ def normalise(status: str) -> str:
 
 
 def parse_layers(markdown: str) -> dict[str, str]:
-    """Return {layer: status} from the '## Engineering layers' table of a lab README."""
-    m = re.search(r"^## Engineering layers\s*$(.*?)(?=^## |\Z)", markdown, re.M | re.S)
+    """Return {layer: status} from the 'Engineering layers' table (a ## or ### heading) of a lab README."""
+    m = re.search(r"^#{2,3} Engineering layers\s*$(.*?)(?=^#{2,3} |\Z)", markdown, re.M | re.S)
     if not m:
-        raise ValueError("no '## Engineering layers' section")
+        raise ValueError("no 'Engineering layers' section")
     out: dict[str, str] = {}
     for line in m.group(1).splitlines():
         cells = [c.strip() for c in line.strip().strip("|").split("|")]

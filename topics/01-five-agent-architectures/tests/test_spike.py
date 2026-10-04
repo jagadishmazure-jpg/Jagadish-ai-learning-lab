@@ -37,6 +37,13 @@ def test_parse_layers_reads_only_the_section():
     }
 
 
+def test_parse_layers_accepts_a_subsection_heading():
+    nested = "## 3. How it works\n\n### Engineering layers\n\n| Layer | Status | Where |\n|---|---|---|\n"
+    nested += "| Agent engineering | implemented | x |\n\n### Next\n\n"
+    nested += "| Loop engineering | not in scope | y |\n"
+    assert spike.parse_layers(nested) == {"Agent engineering": "implemented"}
+
+
 def test_missing_section_is_an_error():
     with pytest.raises(ValueError):
         spike.parse_layers("# no table here")
