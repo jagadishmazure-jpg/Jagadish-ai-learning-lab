@@ -19,7 +19,7 @@ Every topic goes through the same four steps, usually within days of the announc
 4. **Adopt:** if it earns ADOPT, build it into a real project and link it; TRIAL items name where
    they are planned to go.
 
-September 2026 at a glance: 4 topics, 2 adopted, 2 in trial, 4 spikes and 49 tests running in CI.
+Current state: 4 topics, 2 adopted, 2 in trial, 4 spikes and 57 tests running in CI.
 
 ```mermaid
 flowchart LR
@@ -28,7 +28,7 @@ flowchart LR
     T --> D{Decide<br/>radar ring}
     D -->|ADOPT| A[Adopt<br/>built into a portfolio repo]
     D -->|TRIAL| P[Planned adoption<br/>named target repo]
-    D -->|ASSESS| W[Watch<br/>revisit next month]
+    D -->|ASSESS| W[Watch<br/>revisit later]
     D -->|HOLD| H[Hold<br/>reason recorded]
     A --> C[CHANGELOG + radar updated]
     P --> C
@@ -38,12 +38,12 @@ flowchart LR
 
 ## Tech radar
 
-| Ring | Topic | Month | Headline result | Where it went |
-|---|---|---|---|---|
-| **ADOPT** | [NVIDIA Open Agent Safety Platform](topics/2026-09-nvidia-open-agent-safety/) | 2026-09 | default-deny + out-of-band kill switch: 6/6 attacks contained, 0/4 false quarantines | [integration platform `src/aiip/safety/`](https://github.com/jagadishmazure-jpg/Jagadish-azure-ai-integration-platform/tree/main/src/aiip/safety) (9/9 contained, 0/4 false, p50 about 0.4-0.7 ms) |
-| **ADOPT** | [Five agent architectures + 12 engineering layers](topics/2026-09-five-agent-architectures/) | 2026-09 | 5 labs x 12 layers: 49 implemented, 5 compile-only, 6 declared out of scope, 0 missing | [Jagadish-azure-agent-labs](https://github.com/jagadishmazure-jpg/Jagadish-azure-agent-labs) |
-| **TRIAL** | [Jev as a "System 1" classifier](topics/2026-09-jev-system1-classifier/) | 2026-09 | two-tier router: 0.970 accuracy, 16.7% escalated, $0.27 vs $1.50 per 1k (LLM only) | planned: FinOps repo + integration platform router |
-| **TRIAL** | [GraphRAG hybrid retrieval](topics/2026-09-graphrag-hybrid-retrieval/) | 2026-09 | hybrid 8/8 vs vector-only 3/8; multi-hop score 1.00 vs 0.25 | partly in [agentic-ai project 15](https://github.com/jagadishmazure-jpg/Jagadish-agentic-ai/tree/main/projects/15-banking-credit-memo) and the [agent platform knowledge layer](https://github.com/jagadishmazure-jpg/Jagadish-azure-agent-platform/tree/main/src/agentplatform/knowledge); planned: unified data layer |
+| Ring | Topic | Headline result | Where it went |
+|---|---|---|---|
+| **ADOPT** | [NVIDIA Open Agent Safety Platform](topics/04-nvidia-open-agent-safety/) | default-deny + out-of-band kill switch: 6/6 attacks contained, 0/4 false quarantines | [integration platform `src/aiip/safety/`](https://github.com/jagadishmazure-jpg/Jagadish-azure-ai-integration-platform/tree/main/src/aiip/safety) (9/9 contained, 0/4 false, p50 about 0.4-0.7 ms) |
+| **ADOPT** | [Five agent architectures + 12 engineering layers](topics/01-five-agent-architectures/) | 5 labs x 12 layers: 49 implemented, 5 compile-only, 6 declared out of scope, 0 missing | [Jagadish-azure-agent-labs](https://github.com/jagadishmazure-jpg/Jagadish-azure-agent-labs) |
+| **TRIAL** | [Jev as a "System 1" classifier](topics/03-jev-system1-classifier/) | two-tier router: 0.970 accuracy, 16.7% escalated, $0.27 vs $1.50 per 1k (LLM only) | rules-based System 1 router in [Jagadish-azure-finops](https://github.com/jagadishmazure-jpg/Jagadish-azure-finops/blob/main/src/finops/ai/routing.py); planned: calibrated tier 1 there and in the integration platform router |
+| **TRIAL** | [GraphRAG hybrid retrieval](topics/02-graphrag-hybrid-retrieval/) | hybrid 8/8 vs vector-only 3/8; multi-hop score 1.00 vs 0.25 | partly in [agentic-ai project 15](https://github.com/jagadishmazure-jpg/Jagadish-agentic-ai/tree/main/projects/15-banking-credit-memo) and the [agent platform knowledge layer](https://github.com/jagadishmazure-jpg/Jagadish-azure-agent-platform/tree/main/src/agentplatform/knowledge); planned: unified data layer |
 
 Rings: **ADOPT** use it by default; **TRIAL** worth using where the risk is manageable, adoption
 planned; **ASSESS** worth understanding, not yet worth building on; **HOLD** do not start new work
@@ -64,18 +64,19 @@ with it (the page says why). No topic is in ASSESS or HOLD yet.
 ## Add a new topic
 
 ```bash
-python scripts/new_topic.py 2026-10 my-new-tool "My New Tool"   # copies TEMPLATE/
+python scripts/new_topic.py my-new-tool "My New Tool"   # copies TEMPLATE/ to topics/05-my-new-tool/
 ```
 
-Then, in the new `topics/2026-10-my-new-tool/` folder:
+Then, in the new `topics/05-my-new-tool/` folder:
 
-1. Write `README.md` in the template's sections: what it is, why it matters for enterprise, what
-   I tested, results (real numbers from the spike), verdict, adopted into, sources (links).
+1. Write `README.md` in the template's 17 sections (purpose, architecture, how it works, ...,
+   adopt this with the verdict), with real output pasted by `python scripts/doc_drift.py`, and
+   the sources linked.
 2. Make `spike.py` real: offline, seeded, compared against a baseline, under a few hundred lines.
 3. Add tests in `tests/` that pin the headline numbers and prove no network access happens.
-4. Add a row to the **Tech radar** table above and an entry under the month in
+4. Add a row to the **Tech radar** table above and an entry in
    [`CHANGELOG.md`](CHANGELOG.md). The repo tests fail until both exist.
-5. Run `ruff check . && ruff format --check . && pytest && python scripts/check_links.py`.
+5. Run `ruff check . && ruff format --check . && pytest && python scripts/doc_drift.py --check && python scripts/check_links.py`.
 
 The template is in [`TEMPLATE/`](TEMPLATE/README.md); the rules are in
 [`CONTRIBUTING.md`](CONTRIBUTING.md).
@@ -88,11 +89,13 @@ The template is in [`TEMPLATE/`](TEMPLATE/README.md); the rules are in
 | [`TEMPLATE/`](TEMPLATE/README.md) | Starting point for a new topic |
 | [`scripts/`](scripts/README.md) | New-topic generator, link checker, spike runner |
 | [`tests/`](tests/README.md) | Repository rules (radar, changelog, READMEs, layout) |
-| [`CHANGELOG.md`](CHANGELOG.md) | What was learned and decided, by month |
+| [`docs/`](docs/README.md) | Best practices, ADRs, why there is no infrastructure, implementation guide, adopt-this checklist, tooling doc |
+| [`CHANGELOG.md`](CHANGELOG.md) | What was learned and decided, by batch of topics |
 | [`SECURITY.md`](SECURITY.md) · [`CONTRIBUTING.md`](CONTRIBUTING.md) | Reporting problems, checks every change must pass |
 
 CI (GitHub Actions, [`.github/workflows/ci.yml`](.github/workflows/ci.yml)) runs ruff, pytest,
-every spike, and the link check on each push.
+every spike, the doc-drift check and the link check on each push. There is no cloud
+infrastructure on purpose: see [docs/no-infrastructure.md](docs/no-infrastructure.md).
 
 ## Run it
 

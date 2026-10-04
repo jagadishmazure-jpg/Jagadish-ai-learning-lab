@@ -13,12 +13,23 @@ ROOT = Path(__file__).resolve().parents[1]
 TOPICS = sorted(p for p in (ROOT / "topics").iterdir() if p.is_dir() and not p.name.startswith("_"))
 RINGS = {"ADOPT", "TRIAL", "ASSESS", "HOLD"}
 SECTIONS = [
-    "## What it is",
-    "## Why it matters for enterprise",
-    "## What I tested",
-    "## Results",
-    "## Verdict:",
-    "## Sources",
+    "Purpose",
+    "Architecture",
+    "How it works",
+    "Key files",
+    "Code excerpts",
+    "Configuration",
+    "Commands",
+    "Real output",
+    "Tests and eval gates",
+    "Guardrails",
+    "Security and governance",
+    "Observability",
+    "Failure modes",
+    "Mapping to Azure services",
+    "Limitations",
+    "Interview talking points",
+    "Adopt this",
 ]
 
 
@@ -44,7 +55,7 @@ def test_there_are_topics():
 
 @pytest.mark.parametrize("topic", TOPICS, ids=lambda p: p.name)
 def test_topic_layout(topic):
-    assert re.fullmatch(r"\d{4}-(0[1-9]|1[0-2])-[a-z0-9]+(-[a-z0-9]+)*", topic.name)
+    assert re.fullmatch(r"\d{2}-[a-z0-9]+(-[a-z0-9]+)*", topic.name)
     for f in ("README.md", "spike.py", "tests/README.md"):
         assert (topic / f).is_file(), f"{topic.name} is missing {f}"
     assert list((topic / "tests").glob("test_*.py")), f"{topic.name} has no tests"
@@ -53,14 +64,15 @@ def test_topic_layout(topic):
 @pytest.mark.parametrize("topic", TOPICS, ids=lambda p: p.name)
 def test_topic_readme_sections_and_ring(topic):
     text = (topic / "README.md").read_text(encoding="utf-8")
-    for s in SECTIONS:
-        assert s in text, f"{topic.name}: missing '{s}'"
+    heads = re.findall(r"^## \d+\. (.+)$", text, re.M)
+    assert heads == SECTIONS, f"{topic.name}: sections {heads}"
+    assert "```mermaid" in text and "<!-- output:" in text and "<!-- code:" in text
     m = re.search(r"^\*\*Ring: (\w+)\*\*", text, re.M)
     assert m and m.group(1) in RINGS
-    assert f"## Verdict: {m.group(1)}" in text, "verdict heading must match the ring"
+    assert f"### Verdict: {m.group(1)}" in text, "verdict heading must match the ring"
     if m.group(1) == "ADOPT":
-        adopted = text.split("## Adopted into", 1)
-        assert len(adopted) == 2 and "](https://github.com/" in adopted[1].split("\n## ")[0]
+        adopted = text.split("### Adopted into", 1)
+        assert len(adopted) == 2 and "](https://github.com/" in adopted[1].split("\n### ")[0]
     sources = text.split("## Sources", 1)[1].split("\n## ")[0]
     assert "](http" in sources or "YouTube" in sources, "sources need a link (or a named video)"
 
@@ -76,8 +88,7 @@ def test_radar_lists_every_topic_with_matching_ring():
 def test_changelog_mentions_every_topic():
     log = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
     for t in TOPICS:
-        assert t.name in log
-        assert f"## {t.name[:7]}" in log, f"no month section for {t.name[:7]}"
+        assert t.name in log, f"{t.name} has no CHANGELOG entry"
 
 
 def test_every_folder_has_a_readme():
@@ -102,14 +113,16 @@ def test_new_topic_script(tmp_path):
 
     shutil.copytree(ROOT / "TEMPLATE", tmp_path / "TEMPLATE")
     mod = _load(ROOT / "scripts" / "new_topic.py", "new_topic_script")
-    dest = mod.create("2026-10", "demo-tool", "Demo Tool", root=tmp_path)
+    dest = mod.create("demo-tool", "Demo Tool", root=tmp_path)
+    assert dest.name == "01-demo-tool"
     text = (dest / "README.md").read_text()
     assert text.startswith("# Demo Tool") and "{{" not in text
     assert (dest / "spike.py").is_file() and (dest / "tests" / "test_spike.py").is_file()
+    assert mod.create("other-tool", "Other", root=tmp_path).name == "02-other-tool"
     with pytest.raises(ValueError):
-        mod.create("2026-13", "x", "X", root=tmp_path)
+        mod.create("Bad Slug", "X", root=tmp_path)
     with pytest.raises(FileExistsError):
-        mod.create("2026-10", "demo-tool", "Demo Tool", root=tmp_path)
+        mod.create("demo-tool", "Demo Tool", root=tmp_path)
 
 
 def test_link_checker_local_rules(tmp_path):

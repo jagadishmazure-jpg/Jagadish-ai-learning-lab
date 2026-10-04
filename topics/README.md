@@ -1,14 +1,14 @@
 # Topics
 
-One folder per topic, named `<YYYY-MM>-<slug>` by the month it was studied. Each has a one-page
-`README.md`, a runnable offline `spike.py`, and `tests/`.
+One folder per topic, named `<NN>-<slug>` and numbered in the order the topics were studied. Each
+has a `README.md` in the 17-section format, a runnable offline `spike.py`, and `tests/`.
 
-| Month | Topic | Ring |
-|---|---|---|
-| 2026-09 | [NVIDIA Open Agent Safety Platform](2026-09-nvidia-open-agent-safety/README.md) | ADOPT |
-| 2026-09 | [Five agent architectures + 12 engineering layers](2026-09-five-agent-architectures/README.md) | ADOPT |
-| 2026-09 | [Jev as a "System 1" classifier](2026-09-jev-system1-classifier/README.md) | TRIAL |
-| 2026-09 | [GraphRAG hybrid retrieval](2026-09-graphrag-hybrid-retrieval/README.md) | TRIAL |
+| File | What it does |
+|---|---|
+| [`01-five-agent-architectures/`](01-five-agent-architectures/README.md) | Five agent architectures + 12 engineering layers (ADOPT) |
+| [`02-graphrag-hybrid-retrieval/`](02-graphrag-hybrid-retrieval/README.md) | GraphRAG hybrid retrieval (TRIAL) |
+| [`03-jev-system1-classifier/`](03-jev-system1-classifier/README.md) | Jev as a "System 1" classifier (TRIAL) |
+| [`04-nvidia-open-agent-safety/`](04-nvidia-open-agent-safety/README.md) | NVIDIA Open Agent Safety Platform (ADOPT) |
 
 The authoritative ring for each topic is the one on its page; the root README's tech radar is
 checked against it by the repository tests.
