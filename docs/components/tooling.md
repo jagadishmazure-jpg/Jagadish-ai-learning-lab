@@ -39,7 +39,9 @@ flowchart LR
 | `scripts/check_links.py` | link checker |
 | `tests/test_repo.py` | repository rules |
 | `tests/test_repo_docs.py` | documentation standard |
-| `.github/workflows/ci.yml` | CI |
+| `.github/workflows/ci.yml` | CI, including the gitleaks secret scan |
+| `.github/workflows/codeql.yml` | CodeQL for Python and the workflows |
+| `.github/dependabot.yml` | weekly, grouped dependency and action updates |
 | `TEMPLATE/` | the starting point for a topic |
 
 ## 5. Code excerpts
@@ -159,7 +161,8 @@ tests/test_repo_docs.py::test_workflows_are_hardened
 ## 11. Security and governance
 
 - `.github/CODEOWNERS` assigns every path to @jagadishmazure-jpg.
-- CI has read-only `contents` permission and no secrets.
+- CI has read-only `contents` permission and no secrets; CodeQL alone may write security events.
+- Actions are pinned to commit SHAs (checked by `test_workflows_are_hardened`); gitleaks scans the full history.
 - No cloud infrastructure ([no-infrastructure.md](../no-infrastructure.md)).
 
 ## 12. Observability
