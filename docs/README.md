@@ -2,6 +2,7 @@
 
 | File | What it does |
 |---|---|
+| [`security/`](security/README.md) | Threat model: STRIDE, OWASP Top 10 for LLM Applications and MITRE ATLAS mapped to this repo's components, with controls, tests and built / planned status |
 | [`adr/`](adr/README.md) | Architecture decision records |
 | [`adopt-this.md`](adopt-this.md) | How to run a lab like this for your own team |
 | [`best-practices.md`](best-practices.md) | Practices for fair, repeatable spikes and where each is enforced |

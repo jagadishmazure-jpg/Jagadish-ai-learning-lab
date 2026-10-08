@@ -4,6 +4,8 @@ What I learned and decided, grouped by batch of topics. Newest batch first.
 
 ## Repository security
 
+- **Added** a threat model (`docs/security/threat-model.md`): STRIDE for the repository and CI, and
+  where the spikes touch the OWASP Top 10 for LLM Applications and MITRE ATLAS.
 - **Added** an SBOM job: CI writes an SPDX JSON software bill of materials of the source tree on
   every run (artifact `sbom.spdx.json`).
 - **Added** supply-chain controls: every GitHub Action pinned to a commit SHA with a version

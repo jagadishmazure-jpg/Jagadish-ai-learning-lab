@@ -110,7 +110,7 @@ pytest
 
 <!-- output: python scripts/check_links.py -->
 ```text
-checked 214 links (0 external URLs fetched): 0 errors, 0 warnings
+checked 218 links (0 external URLs fetched): 0 errors, 0 warnings
 ```
 <!-- /output -->
 
