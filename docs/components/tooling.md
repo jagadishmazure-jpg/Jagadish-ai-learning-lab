@@ -108,7 +108,7 @@ pytest
 
 <!-- output: python scripts/check_links.py -->
 ```text
-checked 209 links (0 external URLs fetched): 0 errors, 0 warnings
+checked 213 links (0 external URLs fetched): 0 errors, 0 warnings
 ```
 <!-- /output -->
 
@@ -146,6 +146,7 @@ tests/test_repo_docs.py::test_codeowners_and_no_github_readme
 tests/test_repo_docs.py::test_ci_checks_doc_drift
 tests/test_repo_docs.py::test_no_placeholders_or_dates_in_docs
 tests/test_repo_docs.py::test_readme_test_count_matches_collection
+tests/test_repo_docs.py::test_workflows_are_hardened
 ```
 <!-- /output -->
 

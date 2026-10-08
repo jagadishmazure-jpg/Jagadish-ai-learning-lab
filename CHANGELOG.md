@@ -2,6 +2,14 @@
 
 What I learned and decided, grouped by batch of topics. Newest batch first.
 
+## Repository security
+
+- **Added** supply-chain controls: every GitHub Action pinned to a commit SHA with a version
+  comment, a gitleaks job over the full git history, a CodeQL workflow, `.github/dependabot.yml`
+  and a guard test (`test_workflows_are_hardened`). `SECURITY.md` gains a fallback contact.
+- **Changed** repository settings: Dependabot alerts and security updates, private vulnerability
+  reporting and a `main` ruleset (no force-push or deletion; CI required on pull requests).
+
 ## Batch 2: documentation and repository standards
 
 - **Changed** topic folders are numbered in study order (`01-` to `04-`) instead of carrying a

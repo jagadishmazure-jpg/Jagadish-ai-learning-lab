@@ -19,7 +19,7 @@ Every topic goes through the same four steps, usually within days of the announc
 4. **Adopt:** if it earns ADOPT, build it into a real project and link it; TRIAL items name where
    they are planned to go.
 
-Current state: 4 topics, 2 adopted, 2 in trial, 4 spikes and 57 tests running in CI.
+Current state: 4 topics, 2 adopted, 2 in trial, 4 spikes and 58 tests running in CI.
 
 ```mermaid
 flowchart LR
@@ -94,7 +94,9 @@ The template is in [`TEMPLATE/`](TEMPLATE/README.md); the rules are in
 | [`SECURITY.md`](SECURITY.md) · [`CONTRIBUTING.md`](CONTRIBUTING.md) | Reporting problems, checks every change must pass |
 
 CI (GitHub Actions, [`.github/workflows/ci.yml`](.github/workflows/ci.yml)) runs ruff, pytest,
-every spike, the doc-drift check and the link check on each push. There is no cloud
+every spike, the doc-drift check, the link check and a gitleaks secret scan on each push;
+[`codeql.yml`](.github/workflows/codeql.yml) runs CodeQL. Actions are pinned to commit SHAs and
+Dependabot ([`.github/dependabot.yml`](.github/dependabot.yml)) proposes weekly updates. There is no cloud
 infrastructure on purpose: see [docs/no-infrastructure.md](docs/no-infrastructure.md).
 
 ## Run it

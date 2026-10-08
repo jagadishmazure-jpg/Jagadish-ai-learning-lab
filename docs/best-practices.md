@@ -42,3 +42,6 @@ where it is enforced.
 | Code owner on every path | `.github/CODEOWNERS` |
 | Lint and format | `ruff check . && ruff format --check .` in CI |
 | Links checked, external links weekly | `scripts/check_links.py --external`, scheduled CI |
+| No secrets in the git history | gitleaks job in `.github/workflows/ci.yml`; GitHub secret scanning and push protection |
+| Actions pinned to commit SHAs, read-only workflow permissions | `tests/test_repo_docs.py::test_workflows_are_hardened` |
+| Dependencies and code scanned | `.github/dependabot.yml` (weekly, grouped), `.github/workflows/codeql.yml`, Dependabot alerts |

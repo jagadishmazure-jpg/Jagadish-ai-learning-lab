@@ -3,7 +3,7 @@
 | File | What it does |
 |---|---|
 | [`test_repo.py`](test_repo.py) | Repository rules for topics, radar, changelog, folder READMEs and scripts |
-| [`test_repo_docs.py`](test_repo_docs.py) | Documentation standard: docs set, ADRs, CODEOWNERS, no dates or placeholders, test count |
+| [`test_repo_docs.py`](test_repo_docs.py) | Documentation standard: docs set, ADRs, CODEOWNERS, no dates or placeholders, test count; workflow supply-chain guard (pinned actions, permissions, gitleaks, CodeQL, Dependabot) |
 
 `test_repo.py` keeps the lab consistent as topics are added:
 
