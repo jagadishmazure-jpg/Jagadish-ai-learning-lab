@@ -102,7 +102,8 @@ class Choice:
 
 
 class ChoiceClassifier(Protocol):
-    def classify(self, text: str, options: tuple[str, ...]) -> Choice: ...
+    def classify(self, text: str, options: tuple[str, ...]) -> Choice:
+        """Pick one of ``options`` for ``text`` and report how sure the backend is."""
 
 
 # --------------------------------------------------------------------------- tier 1 backends
