@@ -4,6 +4,8 @@ What I learned and decided, grouped by batch of topics. Newest batch first.
 
 ## Repository security
 
+- **Added** an SBOM job: CI writes an SPDX JSON software bill of materials of the source tree on
+  every run (artifact `sbom.spdx.json`).
 - **Added** supply-chain controls: every GitHub Action pinned to a commit SHA with a version
   comment, a gitleaks job over the full git history, a CodeQL workflow, `.github/dependabot.yml`
   and a guard test (`test_workflows_are_hardened`). `SECURITY.md` gains a fallback contact.
